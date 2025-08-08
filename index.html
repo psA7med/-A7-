@@ -5,78 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>جراب الوزارة - جرابات تابلت سامسونج A7</title>
   <style>
-    :root{
-      --bg:#0b1118;
-      --panel:#0f1622;
-      --ink:#e9f2ff;
-      --muted:#9fb3c8;
-      --accent:#2ad2ff;
-      --success:#34d399;
-      --danger:#ff6b6b;
-      --gold:#f6c453;
-      --border:rgba(150,180,255,.2);
+    :root {
+      --bg: #0b1118;
+      --panel: #0f1622;
+      --ink: #e9f2ff;
+      --muted: #9fb3c8;
+      --accent: #2ad2ff;
+      --success: #34d399;
+      --danger: #ff6b6b;
+      --gold: #f6c453;
+      --border: rgba(150, 180, 255, 0.2);
+      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      --btn-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+      --mode-icon: "🌙";
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
-    body{
-      background:
-        radial-gradient(1200px 700px at 70% -100px, #142132 0%, #0b1118 60%, #070b11 100%);
-      color:var(--ink);
+
+    /* Light mode variables */
+    .light-mode {
+      --bg: #f0f5ff;
+      --panel: #e6edf8;
+      --ink: #0f1e3d;
+      --muted: #5a6d8a;
+      --accent: #0077cc;
+      --success: #0a8f5e;
+      --danger: #e53935;
+      --gold: #d4a017;
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      --btn-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+      --mode-icon: "☀️";
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Tahoma", sans-serif;
     }
-    a{color:inherit;text-decoration:none}
-    header{
-      position:sticky;top:0;z-index:10;
-      background: linear-gradient(180deg, rgba(10,14,28,.9), rgba(10,14,28,.6) 60%, rgba(10,14,28,0));
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(10, 14, 28, 0.9), rgba(10, 14, 28, 0.6) 60%, rgba(10, 14, 28, 0));
       backdrop-filter: blur(6px);
-      border-bottom:1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .container{width:min(1100px, 94vw);margin:auto}
-    .topbar{
-      display:flex;align-items:center;gap:1rem;padding:.8rem 0;
+
+    .light-mode header {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7) 60%, rgba(255, 255, 255, 0));
     }
-    .logo{
-      width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+
+    .container {
+      width: min(1100px, 94vw);
+      margin: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
       background: conic-gradient(from 0deg, var(--accent), var(--gold), #7bff9b, var(--accent));
-      box-shadow: 0 0 12px rgba(80,200,255,.35);
-      position:relative;overflow:hidden;isolation:isolate;
+      box-shadow: 0 0 12px rgba(80, 200, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .logo::after{content:"";position:absolute;inset:5px;border-radius:8px;background:#0b1118}
-    .brand{font-weight:800;letter-spacing:.3px}
-    .pill{padding:.28rem .6rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--ink);font-size:.9rem}
-    .muted{color:var(--muted)}
-    main{padding:18px 0 80px}
-    .hero{
-      display:grid;grid-template-columns: 1.2fr .9fr;gap:18px;align-items:stretch;
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 8px;
+      background: var(--bg);
     }
-    @media (max-width: 860px){
-      .hero{grid-template-columns:1fr;gap:14px}
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.3px;
     }
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--border);border-radius:16px;padding:16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+
+    .pill {
+      padding: 0.28rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 0.9rem;
     }
-    
+
+    .light-mode .pill {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    main {
+      padding: 18px 0 80px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .light-mode .card {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
     /* Gallery Styles */
     .gallery-container {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    
+
     .main-image {
-      position:relative;
-      overflow:hidden;
-      border-radius:12px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
       max-height: 700px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: radial-gradient(120% 100% at 50% 30%, #0a1422 0%, #0a111a 65%, #060a10 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--panel);
       margin-bottom: 10px;
     }
-    
+
     .main-image img {
       width: auto;
       height: auto;
@@ -85,14 +182,14 @@
       object-fit: contain;
       transition: opacity 0.3s ease;
     }
-    
+
     .thumbnail-container {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
     }
-    
+
     .thumbnail {
       width: 80px;
       height: 60px;
@@ -102,94 +199,325 @@
       transition: all 0.2s ease;
       object-fit: cover;
     }
-    
+
     .thumbnail:hover {
       border-color: var(--accent);
     }
-    
+
     .thumbnail.active {
       border-color: var(--gold);
       transform: scale(1.05);
     }
-    
+
     /* Hide default scrollbar */
     .thumbnail-container::-webkit-scrollbar {
       height: 5px;
     }
-    
+
     .thumbnail-container::-webkit-scrollbar-thumb {
       background: var(--border);
       border-radius: 10px;
     }
-    
-    .price-box{
-      display:flex;align-items:center;gap:.6rem;flex-wrap:wrap
+
+    .price-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
     }
-    .price{
-      font-size:1.6rem;font-weight:900;color:#fff
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--ink);
     }
-    .badge{
-      background:linear-gradient(180deg, rgba(255,220,120,.35), rgba(255,220,120,.12));
-      border:1px solid rgba(255,220,120,.6);color:#ffecb3;padding:.25rem .55rem;border-radius:8px;font-weight:700
+
+    .badge {
+      background: linear-gradient(180deg, rgba(255, 220, 120, 0.35), rgba(255, 220, 120, 0.12));
+      border: 1px solid rgba(255, 220, 120, 0.6);
+      color: #ffecb3;
+      padding: 0.25rem 0.55rem;
+      border-radius: 8px;
+      font-weight: 700;
     }
-    .product-title{margin:.3rem 0 .4rem 0;font-size:1.6rem}
-    .features{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
-    .feature{border:1px dashed var(--border);padding:.3rem .55rem;border-radius:10px;font-size:.92rem;color:var(--muted)}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-    @media (max-width:640px){.form-grid{grid-template-columns:1fr}}
-    label{display:block;font-size:.9rem;margin:.15rem 2px;color:var(--muted)}
-    input,select,textarea{
-      width:100%;padding:.6rem .7rem;border-radius:10px;
-      border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));color:var(--ink);
-      outline:none
+
+    .light-mode .badge {
+      color: #8a6d3b;
     }
-    textarea{min-height:86px;resize:vertical}
-    .qty-row{display:flex;align-items:center;gap:.5rem}
-    .qty-ctrl{
-      display:flex;align-items:center;border:1px solid var(--border);border-radius:10px;overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+
+    .product-title {
+      margin: 0.3rem 0 0.4rem 0;
+      font-size: 1.6rem;
+      color: var(--ink);
     }
-    .qty-ctrl button{
-      border:none;padding:.55rem .7rem;font-weight:900;font-size:1.05rem
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.6rem 0;
     }
-    .qty-ctrl input{
-      width:84px;text-align:center;border:none;background:transparent;font-weight:800;font-size:1rem
+
+    .feature {
+      border: 1px dashed var(--border);
+      padding: 0.3rem 0.55rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: var(--muted);
     }
-    .btnbar{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:12px}
-    button{
-      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
-      color:var(--ink);border:1px solid var(--border);
-      padding:.7rem 1rem;border-radius:12px;cursor:pointer;font-weight:800;letter-spacing:.2px;
-      transition:.15s transform ease, .2s background ease, .2s border ease, .2s filter ease;backdrop-filter: blur(4px);
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
     }
-    button:hover{transform:translateY(-1px);border-color:rgba(150,180,255,.45)}
-    button.primary{background: linear-gradient(180deg, rgba(42,210,255,.35), rgba(42,210,255,.12)); border-color: rgba(42,210,255,.65)}
-    button.success{background: linear-gradient(180deg, rgba(52,211,153,.35), rgba(52,211,153,.12)); border-color: rgba(52,211,153,.6)}
-    .note{
-      margin-top:10px;color:var(--muted);font-size:.95rem;line-height:1.65;background:rgba(255,255,255,.04);
-      border:1px dashed var(--border);padding:.6rem .7rem;border-radius:12px
+
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    .how{
-      display:grid;gap:.5rem;margin-top:.5rem
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin: 0.15rem 2px;
+      color: var(--muted);
     }
-    .how .step{
-      display:flex;gap:.6rem;align-items:flex-start
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+      color: var(--ink);
+      outline: none;
     }
-    .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:.42rem;box-shadow:0 0 8px var(--accent)}
-    footer{
-      position:fixed;inset-inline:0;bottom:0;display:flex;justify-content:center;
-      padding:.55rem .7rem;color:var(--muted);font-size:.9rem;opacity:.9;
-      background: linear-gradient(0deg, rgba(10,14,28,.92), rgba(10,14,28,.65) 60%, rgba(10,14,28,0));
-      border-top:1px solid var(--border);backdrop-filter: blur(6px);
+
+    .light-mode input,
+    .light-mode select,
+    .light-mode textarea {
+      background: rgba(255, 255, 255, 0.7);
     }
-    .toast{
-      position:fixed;top:64px;left:50%;transform:translateX(-50%);
-      background:rgba(20,30,60,.92);color:var(--ink);border:1px solid var(--border);
-      padding:.5rem .75rem;border-radius:10px;font-size:.93rem;opacity:0;transition:.25s;pointer-events:none;z-index:20
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
     }
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(4px)}
-    .inline{display:inline}
-    .strike{ text-decoration: line-through; opacity:.85 }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    }
+
+    .light-mode .qty-ctrl {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .qty-ctrl button {
+      border: none;
+      padding: 0.55rem 0.7rem;
+      font-weight: 900;
+      font-size: 1.05rem;
+      background: var(--panel);
+      cursor: pointer;
+    }
+
+    .qty-ctrl input {
+      width: 84px;
+      text-align: center;
+      border: none;
+      background: transparent;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .btnbar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      background: var(--btn-bg);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      transition: 0.15s transform ease, 0.2s background ease, 0.2s border ease;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(150, 180, 255, 0.45);
+    }
+
+    button.primary {
+      background: linear-gradient(180deg, rgba(42, 210, 255, 0.35), rgba(42, 210, 255, 0.12));
+      border-color: rgba(42, 210, 255, 0.65);
+    }
+
+    button.success {
+      background: linear-gradient(180deg, rgba(52, 211, 153, 0.35), rgba(52, 211, 153, 0.12));
+      border-color: rgba(52, 211, 153, 0.6);
+    }
+
+    button.voice {
+      background: linear-gradient(180deg, rgba(255, 196, 83, 0.35), rgba(255, 196, 83, 0.12));
+      border-color: rgba(255, 196, 83, 0.6);
+    }
+
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed var(--border);
+      padding: 0.6rem 0.7rem;
+      border-radius: 12px;
+    }
+
+    .light-mode .note {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .how {
+      display: grid;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .how .step {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.42rem;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    footer {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      padding: 0.55rem 0.7rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      opacity: 0.9;
+      background: linear-gradient(0deg, rgba(10, 14, 28, 0.92), rgba(10, 14, 28, 0.65) 60%, rgba(10, 14, 28, 0));
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(6px);
+    }
+
+    .light-mode footer {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0));
+    }
+
+    .toast {
+      position: fixed;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 30, 60, 0.92);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      border-radius: 10px;
+      font-size: 0.93rem;
+      opacity: 0;
+      transition: 0.25s;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .light-mode .toast {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #0f1e3d;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(4px);
+    }
+
+    .inline {
+      display: inline;
+    }
+
+    .strike {
+      text-decoration: line-through;
+      opacity: 0.85;
+    }
+
+    /* Mode toggle button */
+    .mode-toggle {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-inline-start: auto;
+      transition: 0.3s;
+    }
+
+    .light-mode .mode-toggle {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .mode-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .mode-toggle::before {
+      content: var(--mode-icon);
+      font-size: 1.2rem;
+    }
+
+    /* Voice call button */
+    .voice-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.1 14.3l-1.8-1.8c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4zM16.9 11.1l-1.8-1.8c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zM8.3 9.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L8.3 9.7zm7.4 7.4c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-1.8-1.8z"/></svg>');
+      background-size: contain;
+    }
   </style>
 </head>
 <body>
@@ -200,6 +528,9 @@
         <div class="brand">جراب الوزارة</div>
         <div class="muted" style="font-size:.92rem">جراب تابلت سامسونج A7 - لون أسود</div>
       </div>
+      
+      <div class="mode-toggle" id="modeToggle"></div>
+      
       <span class="pill" style="margin-inline-start:auto">دفع عند الاستلام</span>
       <span class="pill">شحن سريع</span>
     </div>
@@ -282,8 +613,23 @@
           </div>
 
           <div class="btnbar">
-            <button type="button" class="success" id="confirmWhatsApp">تأكيد الطلب عبر واتساب</button>
-            <button type="button" class="primary" id="confirmEmail">تأكيد الطلب عبر البريد</button>
+            <button type="button" class="success" id="confirmWhatsApp">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5005 14.309C17.3075 14.122 15.6185 12.691 15.2925 12.537C14.9665 12.383 14.7155 12.306 14.4645 12.499C14.2135 12.692 13.6705 13.268 13.5175 13.46C13.3645 13.652 13.2115 13.675 12.9185 13.522C12.6255 13.369 11.6695 13.069 10.5565 12.073C9.68753 11.29 9.11153 10.334 8.95853 10.041C8.80553 9.748 8.95953 9.574 9.11253 9.421C9.24853 9.285 9.42153 9.076 9.57453 8.883C9.72753 8.69 9.76653 8.535 9.88253 8.305C9.99853 8.075 9.92153 7.87 9.80553 7.7C9.68953 7.53 8.95853 6.152 8.71253 5.631C8.47353 5.124 8.22753 5.177 8.05053 5.177C7.87353 5.177 7.64053 5.146 7.42453 5.146C7.20853 5.146 6.86553 5.223 6.57253 5.53C6.27953 5.837 5.50053 6.575 5.50053 7.899C5.50053 9.223 6.40553 10.5 6.54253 10.693C6.67953 10.886 8.36853 13.675 11.1225 14.966C11.7185 15.235 12.2135 15.427 12.6255 15.565C13.2215 15.765 13.7515 15.73 14.1705 15.652C14.6325 15.565 15.8165 14.989 16.0665 14.373C16.3165 13.757 16.3165 13.218 16.2335 13.14C16.1505 13.062 15.9995 13.008 15.8065 13.161C15.6135 13.314 15.0355 13.69 14.8825 13.767C14.7295 13.844 14.5995 13.821 14.4645 13.652C14.3295 13.483 13.9095 12.96 13.7565 12.767C13.6035 12.574 13.4505 12.612 13.3355 12.612C13.2205 12.612 13.0335 12.574 12.8665 12.574C12.6995 12.574 12.4265 12.653 12.2105 12.883C11.9945 13.113 11.4055 13.652 11.4055 14.79C11.4055 15.928 12.2345 17.013 12.4455 17.282C12.6565 17.551 14.3265 19.5 17.0225 19.5C18.3465 19.5 19.0005 18.762 19.1925 18.469C19.3845 18.176 19.5005 17.5 19.5005 17.5C19.5005 17.5 19.4615 17.2 19.3075 16.907C19.1535 16.614 19.0005 16.653 19.0005 16.653C18.8855 16.653 18.7315 16.614 18.5775 16.614C18.4235 16.614 17.6935 16.307 17.5005 14.309Z" fill="currentColor"/>
+                <path d="M12 2C6.486 2 2 6.486 2 12C2 13.582 2.465 15.061 3.279 16.319L2 20L5.681 18.721C6.939 19.535 8.418 20 10 20C15.514 20 20 15.514 20 10C20 4.486 15.514 2 12 2ZM12 18C8.141 18 5 14.859 5 11C5 7.141 8.141 4 12 4C15.859 4 19 7.141 19 11C19 14.859 15.859 18 12 18Z" fill="currentColor"/>
+              </svg>
+              تأكيد الطلب عبر واتساب
+            </button>
+            <button type="button" class="primary" id="confirmEmail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM19 18H5C4.45 18 4 17.55 4 17V8L10.94 12.34C11.59 12.75 12.41 12.75 13.06 12.34L20 8V17C20 17.55 19.55 18 19 18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
+              </svg>
+              تأكيد الطلب عبر البريد
+            </button>
+            <button type="button" class="voice" id="confirmVoice">
+              <span class="voice-icon"></span>
+              تأكيد الطلب عبر مكالمة
+            </button>
           </div>
         </form>
 
@@ -427,6 +773,17 @@
       toast('سيتم فتح بريدك مع رسالة جاهزة، راجعها ثم اضغط إرسال.', 2600);
       setTimeout(()=> window.location.href = mailto, 450);
     });
+    
+    // Voice call confirm
+    const btnVoice = document.getElementById('confirmVoice');
+    btnVoice.addEventListener('click', ()=>{
+      if (!validate()) return;
+      const phoneNumber = '01159793397';
+      toast('سيتم الآن فتح تطبيق الهاتف للاتصال بنا', 2600);
+      setTimeout(()=> {
+        window.location.href = `tel:${phoneNumber}`;
+      }, 450);
+    });
 
     // Live instruction update
     const instructions = document.getElementById('instructions');
@@ -440,12 +797,38 @@
         إجمالي طلبك الحالي: <b>${total} جنيه</b> (${qty} × ${pricePerUnit}).
       `;
     }
+    
     ['name','phone','city','address','notes'].forEach(id=>{
       fields[id].addEventListener('input', ()=> {
         const el = fields[id];
         if (el.value.trim()) el.style.borderColor = '';
       });
     });
+
+    // Mode toggle functionality
+    const modeToggle = document.getElementById('modeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set initial mode based on preference
+    if (prefersDark) {
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+    }
+    
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      // Save preference to localStorage
+      const isLight = document.body.classList.contains('light-mode');
+      localStorage.setItem('lightMode', isLight);
+    });
+    
+    // Check for saved preference
+    if (localStorage.getItem('lightMode') === 'true') {
+      document.body.classList.add('light-mode');
+    } else if (localStorage.getItem('lightMode') === 'false') {
+      document.body.classList.remove('light-mode');
+    }
 
     // Init totals
     updateTotals();
