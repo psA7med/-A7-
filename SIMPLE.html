@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>جراب الوزارة - جرابات تابلت سامسونج A7</title>
+  <style>
+    :root{
+      --bg:#0b1118;
+      --panel:#0f1622;
+      --ink:#e9f2ff;
+      --muted:#9fb3c8;
+      --accent:#2ad2ff;
+      --success:#34d399;
+      --danger:#ff6b6b;
+      --gold:#f6c453;
+      --border:rgba(150,180,255,.2);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      background:
+        radial-gradient(1200px 700px at 70% -100px, #142132 0%, #0b1118 60%, #070b11 100%);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Tahoma", sans-serif;
+    }
+    a{color:inherit;text-decoration:none}
+    header{
+      position:sticky;top:0;z-index:10;
+      background: linear-gradient(180deg, rgba(10,14,28,.9), rgba(10,14,28,.6) 60%, rgba(10,14,28,0));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .container{width:min(1100px, 94vw);margin:auto}
+    .topbar{
+      display:flex;align-items:center;gap:1rem;padding:.8rem 0;
+    }
+    .logo{
+      width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+      background: conic-gradient(from 0deg, var(--accent), var(--gold), #7bff9b, var(--accent));
+      box-shadow: 0 0 12px rgba(80,200,255,.35);
+      position:relative;overflow:hidden;isolation:isolate;
+    }
+    .logo::after{content:"";position:absolute;inset:5px;border-radius:8px;background:#0b1118}
+    .brand{font-weight:800;letter-spacing:.3px}
+    .pill{padding:.28rem .6rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--ink);font-size:.9rem}
+    .muted{color:var(--muted)}
+    main{padding:18px 0 80px}
+    .hero{
+      display:grid;grid-template-columns: 1.2fr .9fr;gap:18px;align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr;gap:14px}
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--border);border-radius:16px;padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    
+    /* Gallery Styles */
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .main-image {
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      max-height: 700px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: radial-gradient(120% 100% at 50% 30%, #0a1422 0%, #0a111a 65%, #060a10 100%);
+      margin-bottom: 10px;
+    }
+    
+    .main-image img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    
+    .thumbnail-container {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    
+    .thumbnail {
+      width: 80px;
+      height: 60px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      object-fit: cover;
+    }
+    
+    .thumbnail:hover {
+      border-color: var(--accent);
+    }
+    
+    .thumbnail.active {
+      border-color: var(--gold);
+      transform: scale(1.05);
+    }
+    
+    /* Hide default scrollbar */
+    .thumbnail-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    
+    .thumbnail-container::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 10px;
+    }
+    
+    .price-box{
+      display:flex;align-items:center;gap:.6rem;flex-wrap:wrap
+    }
+    .price{
+      font-size:1.6rem;font-weight:900;color:#fff
+    }
+    .badge{
+      background:linear-gradient(180deg, rgba(255,220,120,.35), rgba(255,220,120,.12));
+      border:1px solid rgba(255,220,120,.6);color:#ffecb3;padding:.25rem .55rem;border-radius:8px;font-weight:700
+    }
+    .product-title{margin:.3rem 0 .4rem 0;font-size:1.6rem}
+    .features{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+    .feature{border:1px dashed var(--border);padding:.3rem .55rem;border-radius:10px;font-size:.92rem;color:var(--muted)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    @media (max-width:640px){.form-grid{grid-template-columns:1fr}}
+    label{display:block;font-size:.9rem;margin:.15rem 2px;color:var(--muted)}
+    input,select,textarea{
+      width:100%;padding:.6rem .7rem;border-radius:10px;
+      border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));color:var(--ink);
+      outline:none
+    }
+    textarea{min-height:86px;resize:vertical}
+    .qty-row{display:flex;align-items:center;gap:.5rem}
+    .qty-ctrl{
+      display:flex;align-items:center;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    }
+    .qty-ctrl button{
+      border:none;padding:.55rem .7rem;font-weight:900;font-size:1.05rem
+    }
+    .qty-ctrl input{
+      width:84px;text-align:center;border:none;background:transparent;font-weight:800;font-size:1rem
+    }
+    .btnbar{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:12px}
+    button{
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03));
+      color:var(--ink);border:1px solid var(--border);
+      padding:.7rem 1rem;border-radius:12px;cursor:pointer;font-weight:800;letter-spacing:.2px;
+      transition:.15s transform ease, .2s background ease, .2s border ease, .2s filter ease;backdrop-filter: blur(4px);
+    }
+    button:hover{transform:translateY(-1px);border-color:rgba(150,180,255,.45)}
+    button.primary{background: linear-gradient(180deg, rgba(42,210,255,.35), rgba(42,210,255,.12)); border-color: rgba(42,210,255,.65)}
+    button.success{background: linear-gradient(180deg, rgba(52,211,153,.35), rgba(52,211,153,.12)); border-color: rgba(52,211,153,.6)}
+    .note{
+      margin-top:10px;color:var(--muted);font-size:.95rem;line-height:1.65;background:rgba(255,255,255,.04);
+      border:1px dashed var(--border);padding:.6rem .7rem;border-radius:12px
+    }
+    .how{
+      display:grid;gap:.5rem;margin-top:.5rem
+    }
+    .how .step{
+      display:flex;gap:.6rem;align-items:flex-start
+    }
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:.42rem;box-shadow:0 0 8px var(--accent)}
+    footer{
+      position:fixed;inset-inline:0;bottom:0;display:flex;justify-content:center;
+      padding:.55rem .7rem;color:var(--muted);font-size:.9rem;opacity:.9;
+      background: linear-gradient(0deg, rgba(10,14,28,.92), rgba(10,14,28,.65) 60%, rgba(10,14,28,0));
+      border-top:1px solid var(--border);backdrop-filter: blur(6px);
+    }
+    .toast{
+      position:fixed;top:64px;left:50%;transform:translateX(-50%);
+      background:rgba(20,30,60,.92);color:var(--ink);border:1px solid var(--border);
+      padding:.5rem .75rem;border-radius:10px;font-size:.93rem;opacity:0;transition:.25s;pointer-events:none;z-index:20
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(4px)}
+    .inline{display:inline}
+    .strike{ text-decoration: line-through; opacity:.85 }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <div class="brand">جراب الوزارة</div>
+        <div class="muted" style="font-size:.92rem">جراب تابلت سامسونج A7 - لون أسود</div>
+      </div>
+      <span class="pill" style="margin-inline-start:auto">دفع عند الاستلام</span>
+      <span class="pill">شحن سريع</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card">
+        <!-- Gallery Section with your images -->
+        <div class="gallery-container">
+          <div class="main-image">
+            <img id="mainImage" src="https://i.ibb.co/zV9g2TgT/3.png" alt="جراب تابلت سامسونج A7 - صورة 1">
+          </div>
+          <div class="thumbnail-container">
+            <img class="thumbnail active" src="https://i.ibb.co/zV9g2TgT/3.png" alt="صورة مصغرة 1" onclick="changeImage(this, 'https://i.ibb.co/zV9g2TgT/3.png')">
+            <img class="thumbnail" src="https://i.ibb.co/93fXkHJV/4.png" alt="صورة مصغرة 2" onclick="changeImage(this, 'https://i.ibb.co/93fXkHJV/4.png')">
+            <img class="thumbnail" src="https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg" alt="صورة مصغرة 3" onclick="changeImage(this, 'https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg')">
+            <img class="thumbnail" src="https://i.ibb.co/7cbgpqC/5809767876247276507.jpg" alt="صورة مصغرة 4" onclick="changeImage(this, 'https://i.ibb.co/7cbgpqC/5809767876247276507.jpg')">
+          </div>
+        </div>
+        
+        <div style="margin-top:10px;display:flex;gap:.6rem;flex-wrap:wrap">
+          <span class="feature">مصنوع خصيصًا لـ Samsung Galaxy Tab A7</span>
+          <span class="feature">لون أسود أنيق</span>
+          <span class="feature">حماية 360°</span>
+          <span class="feature">خامة متينة ومريحة في اليد</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="price-box">
+          <span class="price"><span id="totalPrice">250</span> جنيه</span>
+          <span class="badge">عرض اليوم</span>
+        </div>
+        <h1 class="product-title">جراب الوزارة - لتابلت سامسونج A7 (أسود)</h1>
+        <p class="muted" style="line-height:1.7">
+          اطلب الآن جراب الوزارة الأصلي لتابلت سامسونج A7 باللون الأسود. خامة قوية وحماية ممتازة وشكل أنيق. متاح التوصيل لجميع المحافظات والدفع عند الاستلام.
+        </p>
+
+        <form id="orderForm" novalidate>
+          <div class="form-grid">
+            <div>
+              <label for="name">الاسم الكامل</label>
+              <input id="name" name="name" placeholder="مثال: أحمد علي" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="phone">رقم الهاتف</label>
+              <input id="phone" name="phone" placeholder="01xxxxxxxxx" inputmode="tel" autocomplete="tel" required>
+            </div>
+            <div>
+              <label for="city">المحافظة</label>
+              <input id="city" name="city" placeholder="مثال: القاهرة" required>
+            </div>
+            <div>
+              <label for="address">العنوان التفصيلي</label>
+              <input id="address" name="address" placeholder="الشارع - رقم المنزل - علامة مميزة" required>
+            </div>
+
+            <div>
+              <label for="qtyInput">الكمية</label>
+              <div class="qty-row">
+                <div class="qty-ctrl">
+                  <button type="button" id="decQty" aria-label="إنقاص الكمية">−</button>
+                  <input id="qtyInput" name="qty" type="number" min="1" max="20" step="1" value="1" inputmode="numeric">
+                  <button type="button" id="incQty" aria-label="زيادة الكمية">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label for="notes">ملاحظات إضافية (اختياري)</label>
+              <input id="notes" name="notes" placeholder="وقت تواصل مناسب أو تفاصيل أخرى">
+            </div>
+          </div>
+
+          <div class="note" id="instructions">
+            قبل التأكيد: سيتم فتح تطبيق واتساب أو البريد على جهازك ومعه رسالة جاهزة تحتوي تفاصيل طلبك.
+            على واتساب: سيتم تحويلك لمحادثة مع الرقم 01285687227 والرسالة مكتوبة مسبقًا، فقط اضغط إرسال.
+            على البريد: سنجهز لك رسالة إلى ahmed3210ali123@gmail.com، وستُفتح نافذة الإرسال في بريدك وبها العنوان والمحتوى، فقط اضغط إرسال.
+          </div>
+
+          <div class="btnbar">
+            <button type="button" class="success" id="confirmWhatsApp">تأكيد الطلب عبر واتساب</button>
+            <button type="button" class="primary" id="confirmEmail">تأكيد الطلب عبر البريد</button>
+          </div>
+        </form>
+
+        <div class="note" style="margin-top:12px">
+          ملاحظة: لا نقوم بإرسال أي بيانات تلقائيًا. أنت من يقوم بإرسال الرسالة بنفسك بعد مراجعتها والتأكيد.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <div>حقوق النشر © جراب الوزارة - تابلت سامسونج A7 | سعر الجراب: <span class="strike">300</span> 250 جنيه | اللون: أسود</div>
+  </footer>
+
+  <script>
+    // Toast helper
+    const toastEl = document.getElementById('toast');
+    function toast(msg, t=2000){
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(()=> toastEl.classList.remove('show'), t);
+    }
+
+    // Image Gallery Functionality
+    function changeImage(thumbnail, newSrc) {
+      // Update main image
+      const mainImage = document.getElementById('mainImage');
+      mainImage.style.opacity = 0;
+      
+      setTimeout(() => {
+        mainImage.src = newSrc;
+        mainImage.style.opacity = 1;
+      }, 200);
+      
+      // Update active thumbnail
+      document.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.classList.remove('active');
+      });
+      thumbnail.classList.add('active');
+    }
+
+    // Order form and actions
+    const form = document.getElementById('orderForm');
+    const fields = {
+      name: document.getElementById('name'),
+      phone: document.getElementById('phone'),
+      city: document.getElementById('city'),
+      address: document.getElementById('address'),
+      qty: document.getElementById('qtyInput'),
+      notes: document.getElementById('notes')
+    };
+    const pricePerUnit = 250;
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    function clampQty(n){
+      const min = parseInt(fields.qty.min || '1',10);
+      const max = parseInt(fields.qty.max || '20',10);
+      return Math.min(max, Math.max(min, isNaN(n) ? min : n));
+    }
+
+    function updateTotals(){
+      const q = clampQty(parseInt(fields.qty.value,10));
+      fields.qty.value = q;
+      totalPriceEl.textContent = String(q * pricePerUnit);
+      refreshInstructions();
+    }
+
+    // Quantity controls
+    document.getElementById('incQty').addEventListener('click', ()=>{
+      fields.qty.value = clampQty(parseInt(fields.qty.value,10)+1);
+      updateTotals();
+    });
+    document.getElementById('decQty').addEventListener('click', ()=>{
+      fields.qty.value = clampQty(parseInt(fields.qty.value,10)-1);
+      updateTotals();
+    });
+    fields.qty.addEventListener('input', updateTotals);
+    fields.qty.addEventListener('change', updateTotals);
+
+    function validate(){
+      let ok = true;
+      for (const el of [fields.name, fields.phone, fields.city, fields.address]){
+        if (!el.value.trim()){
+          el.style.borderColor = 'rgba(255,107,107,.8)';
+          ok = false;
+        } else {
+          el.style.borderColor = '';
+        }
+      }
+      if (!ok) toast('من فضلك اكمل البيانات المطلوبة', 2200);
+      return ok;
+    }
+
+    function buildSummary(){
+      const product = 'جراب الوزارة - سامسونج A7 (أسود)';
+      const price = pricePerUnit;
+      const qty = clampQty(parseInt(fields.qty.value || '1', 10));
+      const total = price * qty;
+      const lines = [
+        'تفاصيل الطلب:',
+        `المنتج: ${product}`,
+        `السعر للوحدة: ${price} جنيه`,
+        `الكمية: ${qty}`,
+        `الإجمالي المتوقع: ${total} جنيه`,
+        '— بيانات العميل —',
+        `الاسم: ${fields.name.value.trim()}`,
+        `الهاتف: ${fields.phone.value.trim()}`,
+        `المحافظة: ${fields.city.value.trim()}`,
+        `العنوان: ${fields.address.value.trim()}`,
+      ];
+      if (fields.notes.value.trim()){
+        lines.push(`ملاحظات: ${fields.notes.value.trim()}`);
+      }
+      lines.push('');
+      lines.push('تم إنشاء هذه الرسالة تلقائيًا من موقع الطلب.');
+      return lines.join('\n');
+    }
+
+    // WhatsApp confirm
+    const btnWA = document.getElementById('confirmWhatsApp');
+    btnWA.addEventListener('click', ()=>{
+      if (!validate()) return;
+      const text = buildSummary();
+      const waNumber = '201285687227'; // +20 128 568 7227
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+      toast('سيتم فتح واتساب الآن مع رسالة جاهزة. فقط اضغط إرسال.', 2600);
+      setTimeout(()=> window.open(url, '_blank'), 450);
+    });
+
+    // Email confirm
+    const btnEmail = document.getElementById('confirmEmail');
+    btnEmail.addEventListener('click', ()=>{
+      if (!validate()) return;
+      const to = 'ahmed3210ali123@gmail.com';
+      const subject = 'تأكيد طلب: جراب الوزارة - سامسونج A7 (أسود)';
+      const body = buildSummary();
+      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      toast('سيتم فتح بريدك مع رسالة جاهزة، راجعها ثم اضغط إرسال.', 2600);
+      setTimeout(()=> window.location.href = mailto, 450);
+    });
+
+    // Live instruction update
+    const instructions = document.getElementById('instructions');
+    function refreshInstructions(){
+      const qty = clampQty(parseInt(fields.qty.value || '1', 10));
+      const total = qty * pricePerUnit;
+      instructions.innerHTML = `
+        قبل التأكيد: سيتم فتح تطبيق واتساب أو البريد على جهازك ومعه رسالة جاهزة تحتوي تفاصيل طلبك.<br>
+        على واتساب: سيتم تحويلك لمحادثة مع الرقم <b>01285687227</b> والرسالة مكتوبة مسبقًا، فقط اضغط إرسال.<br>
+        على البريد: سنجهز لك رسالة إلى <b>ahmed3210ali123@gmail.com</b>، وستُفتح نافذة الإرسال وبها العنوان والمحتوى، فقط اضغط إرسال.<br>
+        إجمالي طلبك الحالي: <b>${total} جنيه</b> (${qty} × ${pricePerUnit}).
+      `;
+    }
+    ['name','phone','city','address','notes'].forEach(id=>{
+      fields[id].addEventListener('input', ()=> {
+        const el = fields[id];
+        if (el.value.trim()) el.style.borderColor = '';
+      });
+    });
+
+    // Init totals
+    updateTotals();
+
+    // Prevent default form submit
+    form.addEventListener('submit', (e)=> e.preventDefault());
+  </script>
+</body>
+</html>
