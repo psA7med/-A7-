@@ -3,675 +3,1311 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>جراب الوزارة - جرابات تابلت سامسونج A7</title>
+  <title>جراب الوزارة الأصلي - تابلت سامسونج A7</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg: #0b1118;
-      --panel: #0f1622;
-      --ink: #e9f2ff;
-      --muted: #9fb3c8;
-      --accent: #2ad2ff;
-      --success: #34d399;
-      --danger: #ff6b6b;
-      --gold: #f6c453;
-      --border: rgba(150, 180, 255, 0.2);
-      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-      --btn-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-      --mode-icon: "🌙";
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+      --warning: #f39c12;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --gradient: linear-gradient(135deg, #3498db, #8e44ad);
     }
-
-    /* Light mode variables */
-    .light-mode {
-      --bg: #f0f5ff;
-      --panel: #e6edf8;
-      --ink: #0f1e3d;
-      --muted: #5a6d8a;
-      --accent: #0077cc;
-      --success: #0a8f5e;
-      --danger: #e53935;
-      --gold: #d4a017;
-      --border: rgba(0, 0, 0, 0.1);
-      --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-      --btn-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
-      --mode-icon: "☀️";
-    }
-
+    
     * {
-      box-sizing: border-box;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-
-    html, body {
-      height: 100%;
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Tajawal', system-ui, sans-serif;
     }
-
+    
     body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Arabic", "Tahoma", sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f0 100%);
+      color: #333;
+      line-height: 1.7;
+      min-height: 100vh;
+      padding-bottom: 80px;
+      position: relative;
+      overflow-x: hidden;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+    
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1f2d 0%, #0d1117 100%);
+      color: #ecf0f1;
     }
-
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
     header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
-      z-index: 10;
-      background: linear-gradient(180deg, rgba(10, 14, 28, 0.9), rgba(10, 14, 28, 0.6) 60%, rgba(10, 14, 28, 0));
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 15px 0;
+      transition: var(--transition);
     }
-
-    .light-mode header {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7) 60%, rgba(255, 255, 255, 0));
+    
+    body.dark-mode header {
+      background: rgba(30, 35, 50, 0.95);
     }
-
-    .container {
-      width: min(1100px, 94vw);
-      margin: auto;
-    }
-
-    .topbar {
+    
+    .header-content {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 0;
+      justify-content: space-between;
+      gap: 20px;
     }
-
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
     .logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: conic-gradient(from 0deg, var(--accent), var(--gold), #7bff9b, var(--accent));
-      box-shadow: 0 0 12px rgba(80, 200, 255, 0.35);
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-
-    .logo::after {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border-radius: 8px;
-      background: var(--bg);
+    
+    .logo:hover {
+      transform: rotate(15deg);
     }
-
+    
     .brand {
+      font-size: 1.6rem;
       font-weight: 800;
-      letter-spacing: 0.3px;
+      color: var(--dark);
+      position: relative;
+      letter-spacing: -0.5px;
     }
-
-    .pill {
-      padding: 0.28rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border);
-      color: var(--ink);
+    
+    .brand::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    
+    .logo-container:hover .brand::after {
+      transform: scaleX(1);
+    }
+    
+    body.dark-mode .brand {
+      color: var(--light);
+    }
+    
+    .product-tag {
       font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-top: 3px;
     }
-
-    .light-mode .pill {
-      background: rgba(0, 0, 0, 0.05);
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* Increased gap */
     }
-
-    .muted {
-      color: var(--muted);
+    
+    .mode-toggle {
+      background: var(--light);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: none;
+      font-size: 20px;
+      margin-left: 15px; /* Added space */
     }
-
-    main {
-      padding: 18px 0 80px;
+    
+    body.dark-mode .mode-toggle {
+      background: #34495e;
+      color: #f1c40f;
     }
-
+    
+    .badge {
+      background: var(--gradient);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Hero Section */
     .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.9fr;
-      gap: 18px;
-      align-items: stretch;
+      padding: 60px 0;
     }
-
-    @media (max-width: 860px) {
-      .hero {
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px; /* Increased gap */
+    }
+    
+    @media (max-width: 900px) {
+      .hero-grid {
         grid-template-columns: 1fr;
-        gap: 14px;
       }
     }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .light-mode .card {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    }
-
+    
     /* Gallery Styles */
     .gallery-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+      padding: 25px;
+      position: relative;
+      z-index: 2;
     }
-
+    
+    body.dark-mode .gallery-container {
+      background: #2c3e50;
+    }
+    
     .main-image {
+      border-radius: 15px;
+      overflow: hidden;
+      height: 450px; /* Increased height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+      margin-bottom: 25px;
+      position: relative;
+      transition: all 0.5s ease;
+      transform-origin: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    body.dark-mode .main-image {
+      background: #1e2535;
+    }
+    
+    .main-image img {
+      max-width: 95%; /* Increased image size */
+      max-height: 95%;
+      object-fit: contain;
+      transition: var(--transition);
+    }
+    
+    .thumbnail-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    
+    .thumbnail {
+      height: 95px; /* Increased height */
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      background: #f8f9fa;
+      position: relative;
+    }
+    
+    body.dark-mode .thumbnail {
+      background: #1e2535;
+    }
+    
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .thumbnail:hover, .thumbnail.active {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+    
+    .thumbnail:hover img {
+      transform: scale(1.1);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    .feature-card {
+      background: rgba(52, 152, 219, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
       position: relative;
       overflow: hidden;
-      border-radius: 12px;
-      max-height: 700px;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--secondary);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+    
+    .feature-card:hover::before {
+      transform: scaleY(1);
+    }
+    
+    body.dark-mode .feature-card {
+      background: rgba(52, 152, 219, 0.15);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+    }
+    
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      background: var(--secondary);
+      border-radius: 50%;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      background: var(--panel);
-      margin-bottom: 10px;
+      color: white;
+      font-size: 20px;
+      z-index: 1;
     }
-
-    .main-image img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      transition: opacity 0.3s ease;
+    
+    .feature-text {
+      font-size: 1rem;
+      font-weight: 500;
+      z-index: 1;
     }
-
-    .thumbnail-container {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
+    
+    /* Product Info */
+    .product-info {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
     }
-
-    .thumbnail {
-      width: 80px;
+    
+    .product-info::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 30px;
+      width: 60px;
       height: 60px;
-      border-radius: 8px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      object-fit: cover;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%233498db" opacity="0.1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>');
+      background-size: contain;
+      z-index: -1;
     }
-
-    .thumbnail:hover {
-      border-color: var(--accent);
+    
+    .product-info::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e74c3c" opacity="0.1"><circle cx="12" cy="12" r="10"></circle></svg>');
+      background-size: contain;
+      z-index: -1;
     }
-
-    .thumbnail.active {
-      border-color: var(--gold);
-      transform: scale(1.05);
+    
+    body.dark-mode .product-info {
+      background: #2c3e50;
     }
-
-    /* Hide default scrollbar */
-    .thumbnail-container::-webkit-scrollbar {
-      height: 5px;
-    }
-
-    .thumbnail-container::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 10px;
-    }
-
-    .price-box {
+    
+    .price-container {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #eee;
     }
-
-    .price {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--ink);
+    
+    body.dark-mode .price-container {
+      border-bottom: 1px solid #34495e;
     }
-
-    .badge {
-      background: linear-gradient(180deg, rgba(255, 220, 120, 0.35), rgba(255, 220, 120, 0.12));
-      border: 1px solid rgba(255, 220, 120, 0.6);
-      color: #ffecb3;
-      padding: 0.25rem 0.55rem;
-      border-radius: 8px;
-      font-weight: 700;
-    }
-
-    .light-mode .badge {
-      color: #8a6d3b;
-    }
-
-    .product-title {
-      margin: 0.3rem 0 0.4rem 0;
-      font-size: 1.6rem;
-      color: var(--ink);
-    }
-
-    .features {
+    
+    .price-tag {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.6rem 0;
+      flex-direction: column;
     }
-
-    .feature {
-      border: 1px dashed var(--border);
-      padding: 0.3rem 0.55rem;
-      border-radius: 10px;
-      font-size: 0.92rem;
-      color: var(--muted);
+    
+    .price {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
+    
+    .original-price {
+      font-size: 1.5rem;
+      text-decoration: line-through;
+      color: #95a5a6;
+      font-weight: 500;
+    }
+    
+    .discount-badge {
+      background: var(--accent);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      animation: bounce 1s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-5px); }
+    }
+    
+    .product-title {
+      font-size: 1.9rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .product-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+    
+    body.dark-mode .product-title {
+      color: var(--light);
+    }
+    
+    .product-description {
+      color: #7f8c8d;
+      margin-bottom: 25px;
+      line-height: 1.8;
+      background: rgba(236, 240, 241, 0.5);
+      padding: 15px;
+      border-radius: 12px;
+      border-right: 3px solid var(--secondary);
+    }
+    
+    body.dark-mode .product-description {
+      color: #bdc3c7;
+      background: rgba(44, 62, 80, 0.5);
+    }
+    
+    /* Order Form */
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 25px;
     }
-
-    @media (max-width: 640px) {
+    
+    @media (max-width: 600px) {
       .form-grid {
         grid-template-columns: 1fr;
       }
     }
-
+    
+    .form-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
     label {
       display: block;
-      font-size: 0.9rem;
-      margin: 0.15rem 2px;
-      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
     }
-
-    input,
-    select,
-    textarea {
+    
+    body.dark-mode label {
+      color: var(--light);
+    }
+    
+    input, textarea {
       width: 100%;
-      padding: 0.6rem 0.7rem;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-      color: var(--ink);
+      padding: 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: #f8f9fa;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    body.dark-mode input, 
+    body.dark-mode textarea {
+      background: #34495e;
+      border-color: #2c3e50;
+      color: white;
+    }
+    
+    input:focus, textarea:focus {
       outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     }
-
-    .light-mode input,
-    .light-mode select,
-    .light-mode textarea {
-      background: rgba(255, 255, 255, 0.7);
-    }
-
+    
     textarea {
-      min-height: 86px;
+      min-height: 100px;
       resize: vertical;
     }
-
-    .qty-row {
+    
+    .qty-control {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 15px;
     }
-
-    .qty-ctrl {
-      display: flex;
-      align-items: center;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    }
-
-    .light-mode .qty-ctrl {
-      background: rgba(255, 255, 255, 0.7);
-    }
-
-    .qty-ctrl button {
-      border: none;
-      padding: 0.55rem 0.7rem;
-      font-weight: 900;
-      font-size: 1.05rem;
-      background: var(--panel);
-      cursor: pointer;
-    }
-
-    .qty-ctrl input {
-      width: 84px;
-      text-align: center;
-      border: none;
-      background: transparent;
-      font-weight: 800;
-      font-size: 1rem;
-    }
-
-    .btnbar {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    button {
-      background: var(--btn-bg);
-      color: var(--ink);
-      border: 1px solid var(--border);
-      padding: 0.7rem 1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      transition: 0.15s transform ease, 0.2s background ease, 0.2s border ease;
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      border-color: rgba(150, 180, 255, 0.45);
-    }
-
-    button.primary {
-      background: linear-gradient(180deg, rgba(42, 210, 255, 0.35), rgba(42, 210, 255, 0.12));
-      border-color: rgba(42, 210, 255, 0.65);
-    }
-
-    button.success {
-      background: linear-gradient(180deg, rgba(52, 211, 153, 0.35), rgba(52, 211, 153, 0.12));
-      border-color: rgba(52, 211, 153, 0.6);
-    }
-
-    button.voice {
-      background: linear-gradient(180deg, rgba(255, 196, 83, 0.35), rgba(255, 196, 83, 0.12));
-      border-color: rgba(255, 196, 83, 0.6);
-    }
-
-    .note {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.65;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px dashed var(--border);
-      padding: 0.6rem 0.7rem;
-      border-radius: 12px;
-    }
-
-    .light-mode .note {
-      background: rgba(0, 0, 0, 0.03);
-    }
-
-    .how {
-      display: grid;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .how .step {
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
+    
+    .qty-btn {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: var(--accent);
-      margin-top: 0.42rem;
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    footer {
-      position: fixed;
-      inset-inline: 0;
-      bottom: 0;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
       display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 0.55rem 0.7rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-      opacity: 0.9;
-      background: linear-gradient(0deg, rgba(10, 14, 28, 0.92), rgba(10, 14, 28, 0.65) 60%, rgba(10, 14, 28, 0));
-      border-top: 1px solid var(--border);
-      backdrop-filter: blur(6px);
+      transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-
-    .light-mode footer {
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0));
+    
+    .qty-btn:hover {
+      transform: scale(1.1);
+      background: #2980b9;
     }
-
-    .toast {
-      position: fixed;
-      top: 64px;
+    
+    .qty-input {
+      width: 80px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: white;
+      border: 2px solid var(--secondary);
+    }
+    
+    /* Buttons */
+    .btn-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    @media (max-width: 768px) {
+      .btn-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .btn {
+      padding: 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+    }
+    
+    .btn-email {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+    
+    .btn-voice {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      color: white;
+    }
+    
+    .info-note {
+      background: rgba(236, 240, 241, 0.5);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 25px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      border-left: 3px solid var(--accent);
+    }
+    
+    body.dark-mode .info-note {
+      background: rgba(44, 62, 80, 0.5);
+    }
+    
+    .info-note strong {
+      color: var(--accent);
+    }
+    
+    /* Instructions Section */
+    .instructions-section {
+      margin-top: 40px;
+      background: rgba(236, 240, 241, 0.5);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+    
+    body.dark-mode .instructions-section {
+      background: rgba(44, 62, 80, 0.5);
+    }
+    
+    .instructions-title {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      text-align: center;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    body.dark-mode .instructions-title {
+      color: var(--light);
+    }
+    
+    .instructions-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(20, 30, 60, 0.92);
-      color: var(--ink);
-      border: 1px solid var(--border);
-      padding: 0.5rem 0.75rem;
-      border-radius: 10px;
-      font-size: 0.93rem;
-      opacity: 0;
-      transition: 0.25s;
-      pointer-events: none;
-      z-index: 20;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
     }
-
-    .light-mode .toast {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      color: #0f1e3d;
+    
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(4px);
+    
+    @media (max-width: 768px) {
+      .instructions-grid {
+        grid-template-columns: 1fr;
+      }
     }
-
-    .inline {
-      display: inline;
+    
+    .instruction-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border-top: 4px solid var(--secondary);
     }
-
-    .strike {
-      text-decoration: line-through;
-      opacity: 0.85;
+    
+    body.dark-mode .instruction-card {
+      background: #2c3e50;
     }
-
-    /* Mode toggle button */
-    .mode-toggle {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--border);
+    
+    .instruction-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .instruction-icon {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+    
+    .instruction-card.whatsapp .instruction-icon {
+      color: #25D366;
+    }
+    
+    .instruction-card.email .instruction-icon {
+      color: #3498db;
+    }
+    
+    .instruction-card.voice .instruction-icon {
+      color: #e74c3c;
+    }
+    
+    .instruction-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    body.dark-mode .instruction-title {
+      color: var(--light);
+    }
+    
+    .instruction-content {
+      color: #7f8c8d;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    body.dark-mode .instruction-content {
+      color: #bdc3c7;
+    }
+    
+    /* Floating WhatsApp Button */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      background: #25D366;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 100;
       cursor: pointer;
-      margin-inline-start: auto;
-      transition: 0.3s;
+      transition: var(--transition);
+      animation: float 3s ease-in-out infinite;
     }
-
-    .light-mode .mode-toggle {
-      background: rgba(0, 0, 0, 0.05);
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
-
-    .mode-toggle:hover {
-      transform: scale(1.1);
+    
+    .floating-whatsapp:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      animation: none;
     }
-
-    .mode-toggle::before {
-      content: var(--mode-icon);
+    
+    .floating-label {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #25D366;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+    
+    .floating-whatsapp:hover .floating-label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-5px);
+    }
+    
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+      z-index: 100;
+    }
+    
+    body.dark-mode footer {
+      background: rgba(30, 35, 50, 0.95);
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: white;
+      color: var(--dark);
+      padding: 15px 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      font-weight: 600;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    body.dark-mode .toast {
+      background: #34495e;
+      color: white;
+    }
+    
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    
+    .toast i {
       font-size: 1.2rem;
     }
-
-    /* Voice call button */
-    .voice-icon {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.1 14.3l-1.8-1.8c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4zM16.9 11.1l-1.8-1.8c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zM8.3 9.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L8.3 9.7zm7.4 7.4c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l1.8 1.8c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-1.8-1.8z"/></svg>');
-      background-size: contain;
+    
+    .toast.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .toast.error {
+      border-left: 4px solid var(--accent);
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animated {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Decorative Elements */
+    .decor-circle {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .circle-1 {
+      width: 200px;
+      height: 200px;
+      background: rgba(52, 152, 219, 0.1);
+      top: 10%;
+      right: -100px;
+    }
+    
+    .circle-2 {
+      width: 150px;
+      height: 150px;
+      background: rgba(231, 76, 60, 0.1);
+      bottom: 20%;
+      left: -75px;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    body.dark-mode .mobile-menu-btn {
+      color: var(--light);
+    }
+    
+    /* Mobile Menu Panel */
+    .mobile-menu-panel {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      z-index: 1100;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+      transition: var(--transition);
+      padding: 80px 20px 20px;
+    }
+    
+    body.dark-mode .mobile-menu-panel {
+      background: #2c3e50;
+    }
+    
+    .mobile-menu-panel.show {
+      left: 0;
+    }
+    
+    .mobile-menu-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      display: flex;
+      justify-content: flex-end;
+      background: var(--secondary);
+    }
+    
+    .close-menu-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .mobile-menu-links {
+      list-style: none;
+    }
+    
+    .mobile-menu-links li {
+      margin-bottom: 15px;
+    }
+    
+    .mobile-menu-links a {
+      display: block;
+      padding: 12px 15px;
+      background: rgba(52, 152, 219, 0.1);
+      border-radius: 10px;
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    body.dark-mode .mobile-menu-links a {
+      color: var(--light);
+      background: rgba(52, 152, 219, 0.15);
+    }
+    
+    .mobile-menu-links a:hover {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1090;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+    
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero {
+        padding: 30px 0;
+      }
+      
+      .main-image {
+        height: 350px;
+      }
+      
+      .btn-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container topbar">
-      <div class="logo" aria-hidden="true"></div>
-      <div>
-        <div class="brand">جراب الوزارة</div>
-        <div class="muted" style="font-size:.92rem">جراب تابلت سامسونج A7 - لون أسود</div>
-      </div>
-      
-      <div class="mode-toggle" id="modeToggle"></div>
-      
-      <span class="pill" style="margin-inline-start:auto">دفع عند الاستلام</span>
-      <span class="pill">شحن سريع</span>
-    </div>
-  </header>
+  <!-- Decorative Circles -->
+  <div class="decor-circle circle-1"></div>
+  <div class="decor-circle circle-2"></div>
+  
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span>تم إرسال طلبك بنجاح!</span>
+  </div>
 
-  <main class="container">
-    <section class="hero">
-      <div class="card">
-        <!-- Gallery Section with your images -->
-        <div class="gallery-container">
-          <div class="main-image">
-            <img id="mainImage" src="https://i.ibb.co/zV9g2TgT/3.png" alt="جراب تابلت سامسونج A7 - صورة 1">
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="logo-container">
+          <div class="logo">
+            <i class="fas fa-shield-alt"></i>
           </div>
-          <div class="thumbnail-container">
-            <img class="thumbnail active" src="https://i.ibb.co/zV9g2TgT/3.png" alt="صورة مصغرة 1" onclick="changeImage(this, 'https://i.ibb.co/zV9g2TgT/3.png')">
-            <img class="thumbnail" src="https://i.ibb.co/93fXkHJV/4.png" alt="صورة مصغرة 2" onclick="changeImage(this, 'https://i.ibb.co/93fXkHJV/4.png')">
-            <img class="thumbnail" src="https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg" alt="صورة مصغرة 3" onclick="changeImage(this, 'https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg')">
-            <img class="thumbnail" src="https://i.ibb.co/7cbgpqC/5809767876247276507.jpg" alt="صورة مصغرة 4" onclick="changeImage(this, 'https://i.ibb.co/7cbgpqC/5809767876247276507.jpg')">
+          <div>
+            <div class="brand">جراب الوزارة</div>
+            <div class="product-tag">جراب تابلت سامسونج A7 - لون أسود</div>
           </div>
         </div>
         
-        <div style="margin-top:10px;display:flex;gap:.6rem;flex-wrap:wrap">
-          <span class="feature">مصنوع خصيصًا لـ Samsung Galaxy Tab A7</span>
-          <span class="feature">لون أسود أنيق</span>
-          <span class="feature">حماية 360°</span>
-          <span class="feature">خامة متينة ومريحة في اليد</span>
+        <div class="header-actions">
+          <div class="badge">
+            <i class="fas fa-shipping-fast"></i>
+            توصيل سريع
+          </div>
+          <button class="mode-toggle" id="modeToggle" aria-label="تبديل وضع الليل">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
       </div>
+    </div>
+  </header>
 
-      <div class="card">
-        <div class="price-box">
-          <span class="price"><span id="totalPrice">250</span> جنيه</span>
-          <span class="badge">عرض اليوم</span>
-        </div>
-        <h1 class="product-title">جراب الوزارة - لتابلت سامسونج A7 (أسود)</h1>
-        <p class="muted" style="line-height:1.7">
-          اطلب الآن جراب الوزارة الأصلي لتابلت سامسونج A7 باللون الأسود. خامة قوية وحماية ممتازة وشكل أنيق. متاح التوصيل لجميع المحافظات والدفع عند الاستلام.
-        </p>
+  <!-- Mobile Menu Panel -->
+  <div class="mobile-menu-panel" id="mobileMenuPanel">
+    <div class="mobile-menu-header">
+      <button class="close-menu-btn" id="closeMenuBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <ul class="mobile-menu-links">
+      <li><a href="#product-info">معلومات المنتج</a></li>
+      <li><a href="#instructions-section">طرق التأكيد</a></li>
+      <li><a href="tel:01159793397">اتصل بنا</a></li>
+      <li><a href="https://wa.me/201285687227">واتساب</a></li>
+    </ul>
+  </div>
+  
+  <div class="menu-overlay" id="menuOverlay"></div>
 
-        <form id="orderForm" novalidate>
-          <div class="form-grid">
-            <div>
-              <label for="name">الاسم الكامل</label>
-              <input id="name" name="name" placeholder="مثال: أحمد علي" autocomplete="name" required>
+  <main>
+    <div class="container">
+      <div class="hero">
+        <div class="hero-grid">
+          <div class="gallery-container animated">
+            <div class="main-image">
+              <img id="mainImage" src="https://i.ibb.co/zV9g2TgT/3.png" alt="جراب تابلت سامسونج A7">
             </div>
-            <div>
-              <label for="phone">رقم الهاتف</label>
-              <input id="phone" name="phone" placeholder="01xxxxxxxxx" inputmode="tel" autocomplete="tel" required>
-            </div>
-            <div>
-              <label for="city">المحافظة</label>
-              <input id="city" name="city" placeholder="مثال: القاهرة" required>
-            </div>
-            <div>
-              <label for="address">العنوان التفصيلي</label>
-              <input id="address" name="address" placeholder="الشارع - رقم المنزل - علامة مميزة" required>
-            </div>
-
-            <div>
-              <label for="qtyInput">الكمية</label>
-              <div class="qty-row">
-                <div class="qty-ctrl">
-                  <button type="button" id="decQty" aria-label="إنقاص الكمية">−</button>
-                  <input id="qtyInput" name="qty" type="number" min="1" max="20" step="1" value="1" inputmode="numeric">
-                  <button type="button" id="incQty" aria-label="زيادة الكمية">+</button>
-                </div>
+            
+            <div class="thumbnail-container">
+              <div class="thumbnail active" onclick="changeImage('https://i.ibb.co/zV9g2TgT/3.png')">
+                <img src="https://i.ibb.co/zV9g2TgT/3.png" alt="صورة مصغرة 1">
+              </div>
+              <div class="thumbnail" onclick="changeImage('https://i.ibb.co/93fXkHJV/4.png')">
+                <img src="https://i.ibb.co/93fXkHJV/4.png" alt="صورة مصغرة 2">
+              </div>
+              <div class="thumbnail" onclick="changeImage('https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg')">
+                <img src="https://i.ibb.co/prj7psRr/Whats-App-Image-2025-08-07-at-04-00-20-6d0ef930.jpg" alt="صورة مصغرة 3">
+              </div>
+              <div class="thumbnail" onclick="changeImage('https://i.ibb.co/7cbgpqC/5809767876247276507.jpg')">
+                <img src="https://i.ibb.co/7cbgpqC/5809767876247276507.jpg" alt="صورة مصغرة 4">
               </div>
             </div>
-
-            <div>
-              <label for="notes">ملاحظات إضافية (اختياري)</label>
-              <input id="notes" name="notes" placeholder="وقت تواصل مناسب أو تفاصيل أخرى">
+            
+            <div class="features-grid">
+              <div class="feature-card animated delay-1">
+                <div class="feature-icon">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="feature-text">مصمم خصيصاً لسامسونج A7</div>
+              </div>
+              <div class="feature-card animated delay-2">
+                <div class="feature-icon">
+                  <i class="fas fa-palette"></i>
+                </div>
+                <div class="feature-text">لون أسود أنيق</div>
+              </div>
+              <div class="feature-card animated delay-3">
+                <div class="feature-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-text">حماية 360 درجة</div>
+              </div>
+              <div class="feature-card animated delay-4">
+                <div class="feature-icon">
+                  <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div class="feature-text">مريح في اليد</div>
+              </div>
             </div>
           </div>
-
-          <div class="note" id="instructions">
-            قبل التأكيد: سيتم فتح تطبيق واتساب أو البريد على جهازك ومعه رسالة جاهزة تحتوي تفاصيل طلبك.
-            على واتساب: سيتم تحويلك لمحادثة مع الرقم 01285687227 والرسالة مكتوبة مسبقًا، فقط اضغط إرسال.
-            على البريد: سنجهز لك رسالة إلى ahmed3210ali123@gmail.com، وستُفتح نافذة الإرسال في بريدك وبها العنوان والمحتوى، فقط اضغط إرسال.
+          
+          <div class="product-info animated delay-1" id="product-info">
+            <div class="price-container">
+              <div class="price-tag">
+                <div class="price">
+                  <span id="totalPrice">250</span> جنيه
+                  <span class="original-price">300 جنيه</span>
+                </div>
+                <small>السعر شامل الضريبة</small>
+              </div>
+              <div class="discount-badge">وفر 50 جنيه</div>
+            </div>
+            
+            <h1 class="product-title">جراب الوزارة الأصلي لتابلت سامسونج A7</h1>
+            <p class="product-description">
+              جراب الوزارة الأصلي يوفر حماية فائقة لجهازك مع تصميم أنيق وعملي. مصنوع من مواد عالية الجودة لحماية شاملة من الصدمات والخدوش. يتميز بتصميم رفيع لا يزيد من حجم الجهاز مع سهولة الوصول إلى جميع المنافذ والأزرار.
+            </p>
+            
+            <form id="orderForm" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">الاسم الكامل</label>
+                  <input type="text" id="name" placeholder="مثال: أحمد محمد" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="phone">رقم الهاتف</label>
+                  <input type="tel" id="phone" placeholder="01XXXXXXXXX" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="city">المحافظة</label>
+                  <input type="text" id="city" placeholder="مثال: القاهرة" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="address">العنوان التفصيلي</label>
+                  <input type="text" id="address" placeholder="الشارع، المنطقة، رقم المنزل" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                  <label for="qty">الكمية</label>
+                  <div class="qty-control">
+                    <button type="button" class="qty-btn" id="decQty" aria-label="تقليل الكمية">-</button>
+                    <input type="number" id="qtyInput" value="1" min="1" max="10" class="qty-input" aria-label="كمية الطلب">
+                    <button type="button" class="qty-btn" id="incQty" aria-label="زيادة الكمية">+</button>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="notes">ملاحظات إضافية (اختياري)</label>
+                  <textarea id="notes" placeholder="أوقات التوصيل المناسبة أو أي ملاحظات خاصة" aria-label="ملاحظات إضافية"></textarea>
+                </div>
+              </div>
+              
+              <div class="btn-container">
+                <button type="button" class="btn btn-whatsapp" id="confirmWhatsApp">
+                  <i class="fab fa-whatsapp"></i>
+                  تأكيد عبر واتساب
+                </button>
+                
+                <button type="button" class="btn btn-email" id="confirmEmail">
+                  <i class="fas fa-envelope"></i>
+                  تأكيد عبر البريد
+                </button>
+                
+                <button type="button" class="btn btn-voice" id="confirmVoice">
+                  <i class="fas fa-phone-alt"></i>
+                  تأكيد بالمكالمة
+                </button>
+              </div>
+            </form>
+            
+            <div class="info-note">
+              <p><strong>ملاحظة:</strong> سيتم فتح تطبيق واتساب أو البريد الإلكتروني مع تفاصيل طلبك جاهزة للإرسال. إجمالي طلبك الحالي: <strong><span id="currentPrice">250</span> جنيه</strong>.</p>
+              <p>للتأكيد عبر المكالمة الصوتية: سيتم الاتصال بالرقم <strong>01159793397</strong> مباشرة.</p>
+            </div>
+            
+            <!-- Instructions Section -->
+            <section class="instructions-section" id="instructions-section">
+              <h2 class="instructions-title">تعليمات طرق التأكيد</h2>
+              <div class="instructions-grid">
+                <div class="instruction-card whatsapp">
+                  <div class="instruction-icon">
+                    <i class="fab fa-whatsapp"></i>
+                  </div>
+                  <h3 class="instruction-title">تأكيد عبر واتساب</h3>
+                  <p class="instruction-content">
+                    عند النقر على هذا الزر، سيتم فتح تطبيق واتساب مع تفاصيل طلبك جاهزة للإرسال. فقط اضغط إرسال في واتساب.
+                  </p>
+                </div>
+                
+                <div class="instruction-card email">
+                  <div class="instruction-icon">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <h3 class="instruction-title">تأكيد عبر البريد</h3>
+                  <p class="instruction-content">
+                    سيتم فتح تطبيق البريد الإلكتروني مع تفاصيل طلبك. سترسل التفاصيل تلقائيًا إلى بريدنا: ahmed3210ali123@gmail.com
+                  </p>
+                </div>
+                
+                <div class="instruction-card voice">
+                  <div class="instruction-icon">
+                    <i class="fas fa-phone-alt"></i>
+                  </div>
+                  <h3 class="instruction-title">تأكيد بالمكالمة</h3>
+                  <p class="instruction-content">
+                    سيتم الاتصال مباشرة بفريق المبيعات على الرقم 01159793397 لتأكيد طلبك. يرجى الإجابة على المكالمة.
+                  </p>
+                </div>
+              </div>
+            </section>
           </div>
-
-          <div class="btnbar">
-            <button type="button" class="success" id="confirmWhatsApp">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.5005 14.309C17.3075 14.122 15.6185 12.691 15.2925 12.537C14.9665 12.383 14.7155 12.306 14.4645 12.499C14.2135 12.692 13.6705 13.268 13.5175 13.46C13.3645 13.652 13.2115 13.675 12.9185 13.522C12.6255 13.369 11.6695 13.069 10.5565 12.073C9.68753 11.29 9.11153 10.334 8.95853 10.041C8.80553 9.748 8.95953 9.574 9.11253 9.421C9.24853 9.285 9.42153 9.076 9.57453 8.883C9.72753 8.69 9.76653 8.535 9.88253 8.305C9.99853 8.075 9.92153 7.87 9.80553 7.7C9.68953 7.53 8.95853 6.152 8.71253 5.631C8.47353 5.124 8.22753 5.177 8.05053 5.177C7.87353 5.177 7.64053 5.146 7.42453 5.146C7.20853 5.146 6.86553 5.223 6.57253 5.53C6.27953 5.837 5.50053 6.575 5.50053 7.899C5.50053 9.223 6.40553 10.5 6.54253 10.693C6.67953 10.886 8.36853 13.675 11.1225 14.966C11.7185 15.235 12.2135 15.427 12.6255 15.565C13.2215 15.765 13.7515 15.73 14.1705 15.652C14.6325 15.565 15.8165 14.989 16.0665 14.373C16.3165 13.757 16.3165 13.218 16.2335 13.14C16.1505 13.062 15.9995 13.008 15.8065 13.161C15.6135 13.314 15.0355 13.69 14.8825 13.767C14.7295 13.844 14.5995 13.821 14.4645 13.652C14.3295 13.483 13.9095 12.96 13.7565 12.767C13.6035 12.574 13.4505 12.612 13.3355 12.612C13.2205 12.612 13.0335 12.574 12.8665 12.574C12.6995 12.574 12.4265 12.653 12.2105 12.883C11.9945 13.113 11.4055 13.652 11.4055 14.79C11.4055 15.928 12.2345 17.013 12.4455 17.282C12.6565 17.551 14.3265 19.5 17.0225 19.5C18.3465 19.5 19.0005 18.762 19.1925 18.469C19.3845 18.176 19.5005 17.5 19.5005 17.5C19.5005 17.5 19.4615 17.2 19.3075 16.907C19.1535 16.614 19.0005 16.653 19.0005 16.653C18.8855 16.653 18.7315 16.614 18.5775 16.614C18.4235 16.614 17.6935 16.307 17.5005 14.309Z" fill="currentColor"/>
-                <path d="M12 2C6.486 2 2 6.486 2 12C2 13.582 2.465 15.061 3.279 16.319L2 20L5.681 18.721C6.939 19.535 8.418 20 10 20C15.514 20 20 15.514 20 10C20 4.486 15.514 2 12 2ZM12 18C8.141 18 5 14.859 5 11C5 7.141 8.141 4 12 4C15.859 4 19 7.141 19 11C19 14.859 15.859 18 12 18Z" fill="currentColor"/>
-              </svg>
-              تأكيد الطلب عبر واتساب
-            </button>
-            <button type="button" class="primary" id="confirmEmail">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM19 18H5C4.45 18 4 17.55 4 17V8L10.94 12.34C11.59 12.75 12.41 12.75 13.06 12.34L20 8V17C20 17.55 19.55 18 19 18ZM12 11L4 6H20L12 11Z" fill="currentColor"/>
-              </svg>
-              تأكيد الطلب عبر البريد
-            </button>
-            <button type="button" class="voice" id="confirmVoice">
-              <span class="voice-icon"></span>
-              تأكيد الطلب عبر مكالمة
-            </button>
-          </div>
-        </form>
-
-        <div class="note" style="margin-top:12px">
-          ملاحظة: لا نقوم بإرسال أي بيانات تلقائيًا. أنت من يقوم بإرسال الرسالة بنفسك بعد مراجعتها والتأكيد.
         </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="floating-whatsapp" id="floatingWhatsApp" aria-label="تواصل معنا عبر واتساب">
+    <i class="fab fa-whatsapp"></i>
+    <div class="floating-label">تواصل معنا</div>
+  </div>
 
   <footer>
-    <div>حقوق النشر © جراب الوزارة - تابلت سامسونج A7 | سعر الجراب: <span class="strike">300</span> 250 جنيه | اللون: أسود</div>
+    <div class="container">
+      <div class="copyright">
+        حقوق النشر © 2023 جراب الوزارة - تابلت سامسونج A7 | سعر الجراب: <del>300</del> 250 جنيه | اللون: أسود
+      </div>
+    </div>
   </footer>
 
   <script>
     // Toast helper
     const toastEl = document.getElementById('toast');
-    function toast(msg, t=2000){
-      toastEl.textContent = msg;
+    function showToast(message, type = 'success') {
+      toastEl.querySelector('span').textContent = message;
+      toastEl.className = `toast ${type}`;
       toastEl.classList.add('show');
-      clearTimeout(toast._t);
-      toast._t = setTimeout(()=> toastEl.classList.remove('show'), t);
+      
+      setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 3000);
     }
 
     // Image Gallery Functionality
-    function changeImage(thumbnail, newSrc) {
-      // Update main image
+    function changeImage(newSrc) {
       const mainImage = document.getElementById('mainImage');
       mainImage.style.opacity = 0;
       
       setTimeout(() => {
         mainImage.src = newSrc;
         mainImage.style.opacity = 1;
-      }, 200);
+      }, 300);
       
       // Update active thumbnail
       document.querySelectorAll('.thumbnail').forEach(thumb => {
         thumb.classList.remove('active');
       });
-      thumbnail.classList.add('active');
+      event.currentTarget.classList.add('active');
     }
 
     // Order form and actions
@@ -686,155 +1322,199 @@
     };
     const pricePerUnit = 250;
     const totalPriceEl = document.getElementById('totalPrice');
+    const currentPriceEl = document.getElementById('currentPrice');
+    
+    // Track if form has been started
+    let formStarted = false;
 
-    function clampQty(n){
-      const min = parseInt(fields.qty.min || '1',10);
-      const max = parseInt(fields.qty.max || '20',10);
+    function clampQty(n) {
+      const min = 1;
+      const max = 10;
       return Math.min(max, Math.max(min, isNaN(n) ? min : n));
     }
 
-    function updateTotals(){
-      const q = clampQty(parseInt(fields.qty.value,10));
+    function updateTotals() {
+      const q = clampQty(parseInt(fields.qty.value, 10));
       fields.qty.value = q;
-      totalPriceEl.textContent = String(q * pricePerUnit);
-      refreshInstructions();
+      const total = q * pricePerUnit;
+      totalPriceEl.textContent = total;
+      currentPriceEl.textContent = total;
     }
 
     // Quantity controls
-    document.getElementById('incQty').addEventListener('click', ()=>{
-      fields.qty.value = clampQty(parseInt(fields.qty.value,10)+1);
+    document.getElementById('incQty').addEventListener('click', () => {
+      fields.qty.value = clampQty(parseInt(fields.qty.value, 10) + 1);
       updateTotals();
+      formStarted = true;
     });
-    document.getElementById('decQty').addEventListener('click', ()=>{
-      fields.qty.value = clampQty(parseInt(fields.qty.value,10)-1);
+    
+    document.getElementById('decQty').addEventListener('click', () => {
+      fields.qty.value = clampQty(parseInt(fields.qty.value, 10) - 1);
       updateTotals();
+      formStarted = true;
     });
-    fields.qty.addEventListener('input', updateTotals);
-    fields.qty.addEventListener('change', updateTotals);
+    
+    fields.qty.addEventListener('input', () => {
+      updateTotals();
+      formStarted = true;
+    });
+    
+    // Track form field changes
+    Object.values(fields).forEach(field => {
+      if (field) {
+        field.addEventListener('input', () => {
+          formStarted = true;
+        });
+      }
+    });
 
-    function validate(){
-      let ok = true;
-      for (const el of [fields.name, fields.phone, fields.city, fields.address]){
-        if (!el.value.trim()){
-          el.style.borderColor = 'rgba(255,107,107,.8)';
-          ok = false;
+    function validateForm() {
+      let isValid = true;
+      const requiredFields = [fields.name, fields.phone, fields.city, fields.address];
+      
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderColor = 'var(--accent)';
+          isValid = false;
         } else {
-          el.style.borderColor = '';
+          field.style.borderColor = '';
         }
+      });
+      
+      // Phone validation (Egyptian numbers)
+      const phoneRegex = /^01[0125][0-9]{8}$/;
+      if (fields.phone.value.trim() && !phoneRegex.test(fields.phone.value.trim())) {
+        fields.phone.style.borderColor = 'var(--accent)';
+        showToast('رقم الهاتف غير صحيح', 'error');
+        isValid = false;
       }
-      if (!ok) toast('من فضلك اكمل البيانات المطلوبة', 2200);
-      return ok;
-    }
-
-    function buildSummary(){
-      const product = 'جراب الوزارة - سامسونج A7 (أسود)';
-      const price = pricePerUnit;
-      const qty = clampQty(parseInt(fields.qty.value || '1', 10));
-      const total = price * qty;
-      const lines = [
-        'تفاصيل الطلب:',
-        `المنتج: ${product}`,
-        `السعر للوحدة: ${price} جنيه`,
-        `الكمية: ${qty}`,
-        `الإجمالي المتوقع: ${total} جنيه`,
-        '— بيانات العميل —',
-        `الاسم: ${fields.name.value.trim()}`,
-        `الهاتف: ${fields.phone.value.trim()}`,
-        `المحافظة: ${fields.city.value.trim()}`,
-        `العنوان: ${fields.address.value.trim()}`,
-      ];
-      if (fields.notes.value.trim()){
-        lines.push(`ملاحظات: ${fields.notes.value.trim()}`);
-      }
-      lines.push('');
-      lines.push('تم إنشاء هذه الرسالة تلقائيًا من موقع الطلب.');
-      return lines.join('\n');
+      
+      return isValid;
     }
 
     // WhatsApp confirm
-    const btnWA = document.getElementById('confirmWhatsApp');
-    btnWA.addEventListener('click', ()=>{
-      if (!validate()) return;
-      const text = buildSummary();
-      const waNumber = '201285687227'; // +20 128 568 7227
-      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
-      toast('سيتم فتح واتساب الآن مع رسالة جاهزة. فقط اضغط إرسال.', 2600);
-      setTimeout(()=> window.open(url, '_blank'), 450);
+    document.getElementById('confirmWhatsApp').addEventListener('click', () => {
+      if (!validateForm()) return;
+      
+      showToast('جاري فتح واتساب مع تفاصيل طلبك...');
+      
+      setTimeout(() => {
+        const text = `طلب جراب سامسونج A7 أسود\nالكمية: ${fields.qty.value}\nالإجمالي: ${fields.qty.value * pricePerUnit} جنيه`;
+        const waNumber = '201285687227';
+        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
+      }, 1000);
     });
 
     // Email confirm
-    const btnEmail = document.getElementById('confirmEmail');
-    btnEmail.addEventListener('click', ()=>{
-      if (!validate()) return;
-      const to = 'ahmed3210ali123@gmail.com';
-      const subject = 'تأكيد طلب: جراب الوزارة - سامسونج A7 (أسود)';
-      const body = buildSummary();
-      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      toast('سيتم فتح بريدك مع رسالة جاهزة، راجعها ثم اضغط إرسال.', 2600);
-      setTimeout(()=> window.location.href = mailto, 450);
+    document.getElementById('confirmEmail').addEventListener('click', () => {
+      if (!validateForm()) return;
+      
+      showToast('جاري فتح البريد الإلكتروني مع تفاصيل طلبك...');
+      
+      setTimeout(() => {
+        const subject = 'طلب جراب سامسونج A7 أسود';
+        const body = `الكمية: ${fields.qty.value}\nالإجمالي: ${fields.qty.value * pricePerUnit} جنيه`;
+        window.location.href = `mailto:ahmed3210ali123@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      }, 1000);
     });
     
     // Voice call confirm
-    const btnVoice = document.getElementById('confirmVoice');
-    btnVoice.addEventListener('click', ()=>{
-      if (!validate()) return;
-      const phoneNumber = '01159793397';
-      toast('سيتم الآن فتح تطبيق الهاتف للاتصال بنا', 2600);
-      setTimeout(()=> {
-        window.location.href = `tel:${phoneNumber}`;
-      }, 450);
+    document.getElementById('confirmVoice').addEventListener('click', () => {
+      if (!validateForm()) return;
+      
+      if (confirm('هل تريد الاتصال بنا لتأكيد طلبك؟')) {
+        showToast('جاري الاتصال بفريق المبيعات...');
+        setTimeout(() => {
+          window.location.href = 'tel:01159793397';
+        }, 1000);
+      }
     });
 
-    // Live instruction update
-    const instructions = document.getElementById('instructions');
-    function refreshInstructions(){
-      const qty = clampQty(parseInt(fields.qty.value || '1', 10));
-      const total = qty * pricePerUnit;
-      instructions.innerHTML = `
-        قبل التأكيد: سيتم فتح تطبيق واتساب أو البريد على جهازك ومعه رسالة جاهزة تحتوي تفاصيل طلبك.<br>
-        على واتساب: سيتم تحويلك لمحادثة مع الرقم <b>01285687227</b> والرسالة مكتوبة مسبقًا، فقط اضغط إرسال.<br>
-        على البريد: سنجهز لك رسالة إلى <b>ahmed3210ali123@gmail.com</b>، وستُفتح نافذة الإرسال وبها العنوان والمحتوى، فقط اضغط إرسال.<br>
-        إجمالي طلبك الحالي: <b>${total} جنيه</b> (${qty} × ${pricePerUnit}).
-      `;
-    }
-    
-    ['name','phone','city','address','notes'].forEach(id=>{
-      fields[id].addEventListener('input', ()=> {
-        const el = fields[id];
-        if (el.value.trim()) el.style.borderColor = '';
-      });
-    });
-
-    // Mode toggle functionality
+    // Dark mode toggle
     const modeToggle = document.getElementById('modeToggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set initial mode based on preference
-    if (prefersDark) {
-      document.body.classList.remove('light-mode');
-    } else {
-      document.body.classList.add('light-mode');
-    }
-    
     modeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      // Save preference to localStorage
-      const isLight = document.body.classList.contains('light-mode');
-      localStorage.setItem('lightMode', isLight);
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+      
+      // Save preference
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     });
-    
-    // Check for saved preference
-    if (localStorage.getItem('lightMode') === 'true') {
-      document.body.classList.add('light-mode');
-    } else if (localStorage.getItem('lightMode') === 'false') {
-      document.body.classList.remove('light-mode');
+
+    // Check for saved theme preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     }
 
-    // Init totals
+    // Initialize totals
     updateTotals();
 
-    // Prevent default form submit
-    form.addEventListener('submit', (e)=> e.preventDefault());
+    // Prevent form submission
+    form.addEventListener('submit', (e) => e.preventDefault());
+    
+    // Floating WhatsApp button
+    document.getElementById('floatingWhatsApp').addEventListener('click', () => {
+      const waNumber = '201285687227';
+      window.open(`https://wa.me/${waNumber}`, '_blank');
+    });
+    
+    // Before unload confirmation
+    window.addEventListener('beforeunload', function (e) {
+      if (formStarted) {
+        e.preventDefault();
+        e.returnValue = 'لديك طلب غير مكتمل. هل أنت متأكد من رغبتك في مغادرة الصفحة؟';
+      }
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenuPanel.classList.add('show');
+      menuOverlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenuBtn.addEventListener('click', function() {
+      mobileMenuPanel.classList.remove('show');
+      menuOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+    
+    menuOverlay.addEventListener('click', function() {
+      mobileMenuPanel.classList.remove('show');
+      menuOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    });
+    
+    // Smooth scrolling for mobile menu links
+    document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          // Close mobile menu
+          mobileMenuPanel.classList.remove('show');
+          menuOverlay.classList.remove('show');
+          document.body.style.overflow = '';
+          
+          // Scroll to target
+          setTimeout(() => {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      });
+    });
   </script>
 </body>
 </html>
