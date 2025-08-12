@@ -572,6 +572,79 @@
             background: #4299e1;
             transform: scale(1.2);
         }
+        /* إضافة أنماط جديدة لكود الخصم */
+        .discount-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .discount-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: 'Cairo', sans-serif;
+        }
+        .dark-mode .discount-input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        .discount-btn {
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+            white-space: nowrap;
+        }
+        .discount-btn:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+        .discount-message {
+            margin-top: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .discount-success {
+            background: #f0fff4;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        .dark-mode .discount-success {
+            background: #052e16;
+            color: #86efac;
+            border-color: #166534;
+        }
+        .discount-error {
+            background: #fff5f5;
+            color: #c53030;
+            border: 1px solid #fc8181;
+        }
+        .dark-mode .discount-error {
+            background: #2d2222;
+            color: #fc8181;
+            border-color: #e53e3e;
+        }
+        .discount-info {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border: 1px solid #90cdf4;
+        }
+        .dark-mode .discount-info {
+            background: #1a365d;
+            color: #90cdf4;
+            border-color: #4299e1;
+        }
         @media (max-width: 992px) {
             .product-grid {
                 gap: 30px;
@@ -759,6 +832,16 @@
                 </div>
             </div>
             <form id="orderForm">
+                <!-- حقل كود الخصم -->
+                <div class="form-group">
+                    <label>كود الخصم</label>
+                    <div class="discount-section">
+                        <input type="text" id="discountCode" class="discount-input" placeholder="أدخل كود الخصم">
+                        <button type="button" class="discount-btn" onclick="applyDiscount()">تطبيق الخصم</button>
+                    </div>
+                    <div id="discountMessage" class="discount-message"></div>
+                </div>
+                
                 <div class="form-group">
                     <label>الاسم الكامل *</label>
                     <input type="text" id="fullName" required placeholder="الاسم الثلاثي">
@@ -861,6 +944,10 @@
         let currentImageIndex = 1;
         let touchStartX = 0;
         let touchEndX = 0;
+        // متغيرات جديدة للخصم
+        let discountApplied = false;
+        let discountAmount = 0;
+        const validDiscountCode = "AHMEDALI50";
         
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
@@ -1012,6 +1099,15 @@
             document.getElementById('product-section').style.display = 'none';
             document.getElementById('order-form').style.display = 'block';
             document.getElementById('confirmation-section').style.display = 'none';
+            
+            // إعادة تعيين الخصم عند فتح النموذج
+            discountApplied = false;
+            discountAmount = 0;
+            document.getElementById('discountCode').value = '';
+            document.getElementById('discountMessage').textContent = '';
+            document.getElementById('discountMessage').className = 'discount-message';
+            updateOrderSummary();
+            
             window.scrollTo(0, 0);
         }
         
@@ -1021,6 +1117,61 @@
             document.getElementById('order-form').style.display = 'none';
             document.getElementById('confirmation-section').style.display = 'none';
             window.scrollTo(0, 0);
+        }
+        
+        // دالة تطبيق الخصم
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value.trim();
+            const discountMessage = document.getElementById('discountMessage');
+            
+            if (discountCode === validDiscountCode) {
+                discountApplied = true;
+                discountAmount = 50;
+                discountMessage.textContent = 'تم تطبيق خصم 50 جنيه بنجاح!';
+                discountMessage.className = 'discount-message discount-success';
+                updateOrderSummary();
+            } else if (discountCode === '') {
+                discountMessage.textContent = 'يرجى إدخال كود الخصم';
+                discountMessage.className = 'discount-message discount-info';
+            } else {
+                discountMessage.textContent = 'كود الخصم غير صحيح أو منتهي الصلاحية';
+                discountMessage.className = 'discount-message discount-error';
+                discountApplied = false;
+                discountAmount = 0;
+                updateOrderSummary();
+            }
+        }
+        
+        // تحديث ملخص الطلب مع الخصم
+        function updateOrderSummary() {
+            const basePrice = 250;
+            const totalPrice = basePrice - discountAmount;
+            
+            const orderSummary = document.getElementById('order-summary');
+            orderSummary.innerHTML = `
+                <h3>ملخص الطلب</h3>
+                <div class="summary-item">
+                    <span>جراب الوزارة (أسود) + قلم تاتش</span>
+                    <span>${basePrice} جنيه</span>
+                </div>
+                ${discountApplied ? `
+                <div class="summary-item">
+                    <span>الخصم (كود: ${validDiscountCode})</span>
+                    <span>-${discountAmount} جنيه</span>
+                </div>
+                ` : ''}
+                <div class="summary-item">
+                    <span>التوصيل</span>
+                    <span>مجاني</span>
+                </div>
+                <div class="summary-total">
+                    <span>المجموع النهائي:</span>
+                    <span>${totalPrice} جنيه</span>
+                </div>
+                <div class="payment-info">
+                    الدفع عند الاستلام فقط
+                </div>
+            `;
         }
         
         // Function to send email using Formspree
@@ -1040,6 +1191,11 @@
             formData.append('Product', orderData.product);
             formData.append('Color', orderData.color);
             formData.append('Price', orderData.price);
+            formData.append('Discount Applied', discountApplied ? 'نعم' : 'لا');
+            if (discountApplied) {
+                formData.append('Discount Amount', `${discountAmount} جنيه`);
+                formData.append('Discount Code', validDiscountCode);
+            }
             
             // استبدل هذا الرابط برابط Formspree الخاص بك
             fetch('https://formspree.io/f/xanbvber', {
@@ -1085,7 +1241,7 @@
                 notes: document.getElementById('notes').value,
                 color: selectedColor,
                 product: 'جراب الوزارة + قلم تاتش',
-                price: '250 جنيه'
+                price: discountApplied ? (250 - discountAmount) + ' جنيه (بعد الخصم)' : '250 جنيه'
             };
             
             // Hide order form
