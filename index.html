@@ -111,11 +111,15 @@
             border: 1px solid #cbd5e0;
             overflow: hidden;
             position: relative;
-            background-color: #f1f5f9;
+            background-color: #f1f5f9; /* خلفية فاتحة في الوضع العادي */
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: grab;
+        }
+        .dark-mode .main-image {
+            background-color: #1e293b; /* خلفية داكنة في الوضع المظلم */
+            border-color: #475569;
         }
         .main-image:active {
             cursor: grabbing;
@@ -125,6 +129,7 @@
             height: 100%;
             object-fit: contain; /* عرض الصورة كاملة دون اقتصاص */
             display: none;
+            background-color: inherit; /* توريث لون الخلفية من العنصر الأم */
         }
         .main-image .image-placeholder {
             position: absolute;
@@ -133,8 +138,8 @@
             padding: 20px;
             color: #4a5568;
         }
-        .dark-mode .main-image {
-            border-color: #475569;
+        .dark-mode .main-image .image-placeholder {
+            color: #94a3b8;
         }
         .thumbnail-grid {
             display: grid;
@@ -156,6 +161,9 @@
             overflow: hidden;
             background-size: cover;
             background-position: center;
+        }
+        .dark-mode .thumbnail {
+            background-color: #334155; /* خلفية داكنة للصورة المصغرة في الوضع المظلم */
         }
         .thumbnail:hover {
             background: #1a202c;
@@ -556,6 +564,9 @@
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             transition: all 0.3s ease;
+        }
+        .dark-mode .swipe-dot {
+            background: rgba(255, 255, 255, 0.3); /* لون داكن أكثر للمؤشرات */
         }
         .swipe-dot.active {
             background: #4299e1;
@@ -1111,4 +1122,3 @@
     </script>
 </body>
 </html>
-
